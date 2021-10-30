@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Button from './components/common/buttons/Button';
+import Modal from './components/Modal/Modal';
+import RegistrationForm from './components/registration_form/RegistrationForm';
 
 function App() {
+  // Hooks
+  // -- state
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Custom functions
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Button text='Open modal' action={openModal} />
+
+      {isOpen && (
+        <Modal onClose={closeModal}>
+          <RegistrationForm />
+        </Modal>
+      )}
+    </>
   );
 }
 
